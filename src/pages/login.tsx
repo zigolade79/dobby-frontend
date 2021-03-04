@@ -1,5 +1,5 @@
 import React from "react";
 
 export const Login = () =>{
-     return <div><span>Login</span></div>
+     return <div className="bg-gray-700"><span>Login</span></div>
  }

@@ -37,7 +37,7 @@ export const LoggedInRouter = () => {
     <Router>
       <Header />
       <Switch>
-        {data.me.role === "User" &&
+        {data.me.role === "Client" &&
           userRoutes.map((route) => (
             <Route exact key={route.path} path={route.path}>
               {route.component}

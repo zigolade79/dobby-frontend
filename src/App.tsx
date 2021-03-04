@@ -1,12 +1,12 @@
 import { useReactiveVar } from '@apollo/client';
 import React from 'react';
-import { isLoggedInvar } from './apollo';
+import { isLoggedInVar } from './apollo';
 import { LoggedInRouter } from './routers/logged-in-router';
 import { LoggedOutRouter } from './routers/logged-out-router';
 
 
 function App() {
-  const isLoggedIn = useReactiveVar(isLoggedInvar);
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
  
   return isLoggedIn? <LoggedInRouter />:<LoggedOutRouter />
 }

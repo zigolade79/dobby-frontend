@@ -12,12 +12,12 @@ export const Header: React.FC = () => {
   return (
     <header className="py-4">
       <div className="w-full px-5 xl:px-0 mx-auto max-w-screen-xl flex justify-between">
-        <div className="flex justify-center items-center">
+        <div className="flex justify-between items-center">
           <div>
-            <img src={podcastLogo} className="w-10" />
+            <img src={podcastLogo} className="max-h-10 max-w-10" />
           </div>
           <div>
-            <h1 className=" text-purple-500  text-xl font-bold p-1">
+            <h1 className=" text-red-500  text-xl font-bold p-1">
               <Link to="/">Podcasts</Link>
             </h1>
           </div>
