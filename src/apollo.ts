@@ -1,8 +1,26 @@
-import { ApolloClient, InMemoryCache, makeVar } from '@apollo/client';
+import { ApolloClient, createHttpLink, InMemoryCache, makeVar } from '@apollo/client';
+import { setContext } from "@apollo/client/link/context";
+import { LS_TOKEN } from './constants';
 
-export const isLoggedInVar = makeVar(false);
+const token = localStorage.getItem(LS_TOKEN);
+export const isLoggedInVar = makeVar(Boolean(token));
+export const authTokenVar = makeVar(token);
+
+const httpLink = createHttpLink({
+    //uri: "https://ubereats-challenge-backend.herokuapp.com/graphql",
+    uri:"http://localhost:4000/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+    return {
+        headers: {
+        ...headers,
+        "x-jwt": authTokenVar() || "",
+        },
+    };
+});
 
 export const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 });
