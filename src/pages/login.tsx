@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { authTokenVar, isLoggedInVar } from "../apollo";
 import { Button } from "../components/button";
 import { FormError } from "../components/form-error";
@@ -37,16 +37,17 @@ export const Login = () => {
   } = useForm<ILoginForm>({
     mode: "onChange",
   });
-
+  const history = useHistory();
   const onCompleted = (data: LoginMutation) => {
     const {
       login: { ok, token },
     } = data;
 
     if (ok && token) {
-      localStorage.setItem(LS_TOKEN, token);
       authTokenVar(token);
+      localStorage.setItem(LS_TOKEN, token);
       isLoggedInVar(true);
+      history.push("/");
     }
   };
   const variables = {
@@ -69,7 +70,7 @@ export const Login = () => {
       <Helmet>
         <title>Log In | podcasts</title>
       </Helmet>
-      <div  className=" h-screen flex flex-col justify-center items-center">
+      <div className=" h-screen flex flex-col justify-center items-center">
         <div className="w-full sm:w-5/12 py-16">
           <form
             onSubmit={handleSubmit(_submit)}

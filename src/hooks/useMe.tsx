@@ -12,5 +12,6 @@ export const ME_QUERY = gql`
 `;
 
 export const useMe = () => {
+  console.log("useMe called");
   return useQuery<meQuery>(ME_QUERY);
 };

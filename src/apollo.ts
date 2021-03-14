@@ -12,6 +12,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
+    console.log(`[authLink]  authTokenVar=${ authTokenVar()}`)
     return {
         headers: {
         ...headers,
@@ -22,5 +23,22 @@ const authLink = setContext((_, { headers }) => {
 
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    typePolicies:{
+        Query:{
+            fields:{
+                isLoggedIn:{
+                    read(){
+                        return isLoggedInVar();
+                    }
+                },
+                token: {
+                    read() {
+                        return authTokenVar();
+                    },
+                },
+            }
+        }
+    }
+  })
 });

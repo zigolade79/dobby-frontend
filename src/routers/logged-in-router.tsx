@@ -5,14 +5,13 @@ import { useMe } from "../hooks/useMe";
 import React from "react";
 import { LandingPage } from "../pages/landing-page";
 import { Tools } from "../pages/users/tools";
-
+import { authTokenVar } from "../apollo";
 
 const userRoutes = [
   {
     path: "/tools",
     component: <Tools />,
   },
- 
 ];
 
 const commonRoutes = [
@@ -22,10 +21,12 @@ const commonRoutes = [
   },
 ];
 
-
 export const LoggedInRouter = () => {
+  console.log(`[LoggedInRouter] authTokenVar=${authTokenVar()}`);
   const { data, loading, error } = useMe();
-
+  console.log(`data=${data}`);
+  console.log(`loading=${loading}`);
+  console.log(`error=${error}`);
   if (!data || loading || error) {
     return (
       <div className="h-screen flex justify-center items-center">
@@ -42,7 +43,7 @@ export const LoggedInRouter = () => {
             <Route exact key={route.path} path={route.path}>
               {route.component}
             </Route>
-          ))}        
+          ))}
         {commonRoutes.map((route) => (
           <Route exact key={route.path} path={route.path}>
             {route.component}

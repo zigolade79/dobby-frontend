@@ -7,15 +7,23 @@ import { Header } from "../components/header";
 import { LandingPage } from "../pages/landing-page";
 
 export const LoggedOutRouter = () => {
-    return (
-        <Router>
-            <Header />
-            <Switch>
-                <Route path="/" exact><LandingPage /></Route>
-                <Route path="/login"><Login/></Route>
-                <Route path="/create-account"><CreateAccount/></Route>
-                <Route><NotFound /></Route>
-            </Switch>
-        </Router>
-    )
-}
+  return (
+    <Router>
+      <Header />
+      <Switch>
+        <Route path="/" exact>
+          <LandingPage />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/create-account">
+          <CreateAccount />
+        </Route>
+        <Route>
+          <NotFound />
+        </Route>
+      </Switch>
+    </Router>
+  );
+};
